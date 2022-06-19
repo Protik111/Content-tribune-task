@@ -1,13 +1,17 @@
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
 function App() {
   return (
-    <div className="container-fluid p-0">
-      <div className="d-flex justify-content-center mt-5">
-        <h1>Hi, There</h1>
-      </div>
-      <div className="d-flex justify-content-center">
-        <button type="button" class="btn btn-info">View Course</button>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/home" element={<Home></Home>}></Route>
+        <Route path="/login" element={<Login></Login>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

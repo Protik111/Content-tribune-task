@@ -1,0 +1,79 @@
+.registration_container{
+    background-color: #c2bdbd;
+    width: 30%;
+    border: 1px solid rgb(223, 219, 219);
+    border-radius: 5px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login_container input{
+    width: 250px;
+    height: 45px;
+    border: none;
+    border-radius: 2px;
+    border-bottom: 1px solid gray;
+}
+.login_container input:focus{
+    outline: none;
+    border-bottom: 1px solid rgb(17, 94, 17);
+}
+.login_btn{
+    display: flex;
+    justify-content: space-between;
+}
+
+.login_btn button {
+    background-color: rgb(119, 118, 118);
+    color: white;
+    padding: 5px 2rem;
+    border: none;
+    border-radius: 10px;
+    transform: all .2s;
+}
+.login_btn button:hover{
+    background-color: black;
+}
+.login_btn button:active{
+    background-color: black;
+}
+.login_btn a{
+    font-size: 14px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media screen and (max-width: 900px) {
+    .login_container input{
+        width: 220px;
+        height: 42px;
+    }
+    
+    .registration_container{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:760px) {
+    .login_container input{
+        width: 200px;
+        height: 38px;
+    }
+
+    .login_btn button {
+        padding: 5px 1.5rem;
+    }
+
+    .login_btn a{
+        font-size: 12px;
+    }
+    .registration_container{
+        width: 80%;
+    }
+}
