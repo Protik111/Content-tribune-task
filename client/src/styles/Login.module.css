@@ -4,7 +4,7 @@
     border: 1px solid rgb(223, 219, 219);
     border-radius: 5px;
     position: absolute;
-    top: 60%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

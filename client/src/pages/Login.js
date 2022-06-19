@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../styles/Login.module.css';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { setAlert } from '../../redux/action/Alert.action';
-// import { loginUser } from '../../redux/action/Auth.action';
-// import { registerUser } from '../../redux/action/Auth.action';
-// import Alert from '../Alert/Alert';
+import { setAlert } from '../redux/action/Alert.action';
+import { registerUser } from '../redux/action/Auth.action';
+import { loginUser } from '../redux/action/Auth.action';
 import { Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import Alert from '../components/Alert';
 
 const Login = () => {
     const [newUser, setNewUser] = useState(false);
@@ -16,8 +16,8 @@ const Login = () => {
         password2: ''
     });
 
-    // const { token, isAuthenticated } = useSelector((state => state.authReducer));
-    // const dispatch = useDispatch();
+    const { token, isAuthenticated } = useSelector((state => state.authReducer));
+    const dispatch = useDispatch();
     // console.log(alertReducer, 'alertReducer');
 
 
@@ -25,26 +25,28 @@ const Login = () => {
         setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
     }
 
+    console.log(userInfo)
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(userInfo, 'data');
         const { name, email, password, password2 } = userInfo;
 
         if (newUser && password === password2) {
-            // dispatch(registerUser({ name, email, password }))
+            dispatch(registerUser({ name, email, password }))
         } else if (newUser && password !== password2) {
-            // dispatch(setAlert("Password does not match.", "notMatchedP"));
+            dispatch(setAlert("Password does not match.", "notMatchedP"));
         }
 
         if (!newUser && email && password) {
-            // dispatch(loginUser({ email, password }));
+            dispatch(loginUser({ email, password }));
         }
 
     }
 
-    // if (isAuthenticated) {
-    //     return (<Navigate to="/dashboard"></Navigate>)
-    // }
+    if (isAuthenticated) {
+        return (<Navigate to="/course"></Navigate>)
+    }
 
     return (
         <>
@@ -53,7 +55,7 @@ const Login = () => {
                     {newUser ? <h3>Account Sign Up</h3> : <h3>Account Login</h3>}
                 </div>
                 <div className={`${styles.alert_container} mt5 pb-3`}>
-                    {/* <Alert></Alert> */}
+                    <Alert></Alert>
                 </div>
                 <div className={styles.login_container}>
                     <form onSubmit={handleSubmit}>

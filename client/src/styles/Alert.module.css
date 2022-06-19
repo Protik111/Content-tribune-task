@@ -1,0 +1,9 @@
+.alertTitle{
+    color: white;
+    background-color: rgb(155, 9, 9);
+    border-radius: 5px;
+    text-align: center;
+}
+.alertTitle_success{
+    background-color: #218838;
+}
