@@ -8,7 +8,7 @@ const Home = () => {
                 <h1>Hi, There</h1>
             </div>
             <div className="d-flex justify-content-center">
-                <NavLink to="/login">
+                <NavLink to="/course">
                     <button type="button" class="btn btn-info">View Course</button>
                 </NavLink>
             </div>
