@@ -107,4 +107,42 @@ router.delete('/deletecourse/:course_id', auth, async (req, res) => {
     }
 });
 
+
+router.put('/updatecourse/:course_id', [auth, [
+    body('title', 'Title is Required').notEmpty(),
+    body('course_name', 'Course Name is Required').notEmpty()
+]], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    };
+
+    const courseId = req.params.course_id;
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        if (user.email !== 'admin@gmail.com') {
+            return res.status(400).json({ msg: 'Your are not allowed to update course.' })
+        }
+
+        const user2 = await User.findOne({ user: req.user.id });
+        if (!user2) {
+            return res.status(400).json({ msg: 'Invalid User' })
+        }
+
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return res.status(400).json({ msg: 'COurse Not Found' })
+        }
+        const updatedCourse = await Course.findByIdAndUpdate(courseId, { $set: req.body }, { new: true });
+        res.send(updatedCourse)
+
+    } catch (error) {
+        console.log(error.message);
+        if (error.kind === 'ObjectId') {
+            return res.status(400).json({ msg: 'Course Not Found' })
+        }
+        return res.status(500).json({ msg: 'Server Error' })
+    }
+})
+
 module.exports = router;
