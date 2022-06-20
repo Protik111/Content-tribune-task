@@ -21,6 +21,9 @@
     border-radius: 2px;
     border-bottom: 1px solid gray;
 }
+.checkboxed {
+    width: 10% !important;
+}
 .login_container input:focus{
     outline: none;
     border-bottom: 1px solid rgb(17, 94, 17);

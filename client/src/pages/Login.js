@@ -13,7 +13,8 @@ const Login = () => {
         name: '',
         email: '',
         password: '',
-        password2: ''
+        password2: '',
+        isAdmin: false
     });
 
     const { token, isAuthenticated } = useSelector((state => state.authReducer));
@@ -25,12 +26,19 @@ const Login = () => {
         setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
     }
 
+    const handleChange2 = () => {
+        setUserInfo({
+            ...userInfo, isAdmin: !isAdmin
+        })
+    }
+
+    const { name, email, password, password2, isAdmin } = userInfo;
+
     console.log(userInfo)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(userInfo, 'data');
-        const { name, email, password, password2 } = userInfo;
 
         if (newUser && password === password2) {
             dispatch(registerUser({ name, email, password }))
@@ -40,6 +48,8 @@ const Login = () => {
 
         if (!newUser && email && password) {
             dispatch(loginUser({ email, password }));
+        }else if(!newUser || !email || !password) {
+            dispatch(setAlert("Please Provide All Information.", "notMatchedP"))
         }
 
     }
@@ -74,6 +84,10 @@ const Login = () => {
                             <br />
                             <input onChange={handleChange} type="password" name="password" id="password" />
                         </div>
+                        {!newUser && <div className=''>
+                            <label className={styles.labeled} htmlFor="isAdmin">Admin?</label>
+                            <input className={styles.checkboxed} onChange={handleChange2} type="checkbox" name="isAdmin" id="isAdmin"  defaultChecked={isAdmin}/>
+                        </div>}
                         {newUser && <div>
                             <label htmlFor="password2">Confirm Password</label>
                             <br />
