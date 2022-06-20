@@ -79,4 +79,32 @@ router.post('/createcourse', [auth, [
     }
 })
 
+router.delete('/deletecourse/:course_id', auth, async (req, res) => {
+    const courseId = req.params.course_id;
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        if (user.email !== 'admin@gmail.com') {
+            return res.status(400).json({ msg: 'Your are not allowed to create course.' })
+        }
+
+        const user2 = await User.findOne({ user: req.user.id });
+        if (!user2) {
+            return res.status(400).json({ msg: 'Invalid User' })
+        }
+
+        const course = await Course.findByIdAndDelete(courseId);
+        if (!course) {
+            return res.status(400).json({ msg: 'Course not Found' });
+        }
+        res.status(200).json({ msg: 'Post Deleted Successfully' });
+
+    } catch (error) {
+        console.log(error.message);
+        if (error.kind === 'ObjectId') {
+            return res.status(400).json({ msg: 'Post Not Found' })
+        }
+        return res.status(500).json({ msg: 'Server Error' })
+    }
+});
+
 module.exports = router;
