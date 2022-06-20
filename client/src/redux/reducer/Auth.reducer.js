@@ -4,7 +4,8 @@ const initialState = {
     token: localStorage.getItem('token'),
     user: null,
     isAuthenticated: false,
-    loading: true
+    loading: true,
+    admin: false
 }
 
 const authReducer = (state = initialState, {type, payload}) => {
@@ -16,6 +17,22 @@ const authReducer = (state = initialState, {type, payload}) => {
                 isAuthenticated: true,
                 loading: false
             };
+        case ActionTypes.ADMIN_SUCCESS:
+            return {
+                ...state,
+                admin: payload,
+                user: payload,
+                isAuthenticated: true,
+                loading: false
+            }
+        case ActionTypes.ADMIN_ERROR:
+            return {
+                ...state,
+                admin: false,
+                user: payload,
+                isAuthenticated: true,
+                loading: false
+            }
         case ActionTypes.REGISTER_SUCCESS:
         case ActionTypes.LOGIN_SUCCESS:
             localStorage.setItem('token', payload.token)

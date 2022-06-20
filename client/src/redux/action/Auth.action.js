@@ -22,6 +22,25 @@ export const loadUser = () => async dispatch => {
     }
 }
 
+export const loadAdmin = () => async dispatch => {
+    if (localStorage.token) {
+        setAuthToken(localStorage.token);
+    }
+
+    try {
+        const response = await axios.get('/api/user/isAdmin');
+
+        dispatch({
+            type: ActionTypes.ADMIN_SUCCESS,
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch({
+            type: ActionTypes.ADMIN_ERROR
+        })
+    }
+}
+
 //register a user
 export const registerUser = ({ name, email, password }) => async dispatch => {
     console.log( name, email, password, 'from register Action');

@@ -16,6 +16,7 @@ function App() {
       setAuthToken(localStorage.token);
     }
     store.dispatch(loadUser());
+    // store.dispatch(loadAdmin());
   }, []);
   return (
     <Provider store={store}>
