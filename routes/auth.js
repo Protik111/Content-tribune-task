@@ -24,6 +24,28 @@ router.get('/userbyid', auth, async (req, res) => {
     }
 })
 
+//@route Get Api
+//@desc check admin or not
+//@access Private
+router.get('/isAdmin', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        console.log(user.email);
+        let admin = false;
+        if(user.email !== 'admin@gmail.com') {
+            admin = false
+            return res.send(admin)
+        }
+        admin = true;
+        return res.send(admin)
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            msg: 'Server Error'
+        })
+    }
+})
+
 //@route Post Api
 //@desc Authenticate User
 //@access Public
