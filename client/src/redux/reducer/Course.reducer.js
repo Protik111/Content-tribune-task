@@ -1,11 +1,12 @@
 import { ActionTypes } from '../action/Course.types.js';
 
 const initialState = {
-    course: null
+    course: null,
+    singleCourse: null
 }
 
-const courseReducer = (state = initialState, {type, payload}) => {
-    switch(type){
+const courseReducer = (state = initialState, { type, payload }) => {
+    switch (type) {
         case ActionTypes.SHOW_COURSES:
             return {
                 ...state,
@@ -20,8 +21,20 @@ const courseReducer = (state = initialState, {type, payload}) => {
         case ActionTypes.CREATE_COURSE_ERROR:
         case ActionTypes.DELETE_COURSE:
         case ActionTypes.DELETE_COURSE_ERROR:
+        case ActionTypes.UPDATE_COURSE:
+        case ActionTypes.UPDATE_COURSE_FAIL:
             return {
                 ...state
+            }
+        case ActionTypes.SHOW_SINGLE_COURSE:
+            return {
+                ...state,
+                singleCourse: payload
+            }
+        case ActionTypes.SHOW_SINGLE_COURSE_ERROR:
+            return {
+                ...state,
+                singleCourse: null
             }
         default:
             return state;

@@ -4,7 +4,7 @@ import CourseStyle from '../components/CourseStyle';
 import { createcourse, showCourses } from '../redux/action/Course.action';
 import { Box } from "@mui/system";
 import LinearProgress from '@mui/material/LinearProgress';
-import { loadAdmin } from '../redux/action/Auth.action';
+import { loadAdmin, logoutUser } from '../redux/action/Auth.action';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Alert from '../components/Alert';
@@ -59,6 +59,10 @@ const Course = () => {
     const handleCourse = async () => {
         dispatch(createcourse(id, step_number, title, content, course_name, course_description, terminal_type, current_users, yaml, navigate));
     }
+    
+    const handleLogout = () => {
+        dispatch(logoutUser(navigate))
+    }
 
     if (course === null) {
         return (
@@ -75,6 +79,7 @@ const Course = () => {
 
 
                 {admin && <button type="button" class="btn btn-info" onClick={handleOpen}>Create Course</button>}
+                <button type="button" class="btn btn-danger" onClick={handleLogout}>Logout</button>
                 <Modal
                     open={open}
                     onClose={handleClose}

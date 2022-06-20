@@ -66,3 +66,56 @@ export const deleteCourse = (id, navigate) => async dispatch => {
         dispatch(setAlert('Course Could Not Deleted Successfully', 'notMatchedP'))
 }
 }
+
+
+export const updateCourse = (formData, id, navigate) => async dispatch => {
+
+    console.log(id, 'from action update')
+    console.log(formData, 'from action update')
+    try {
+        const headersConfig = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const body = JSON.stringify(formData);
+
+        const response = await axios.put(`/api/course/updatecourse/${id}`, body, headersConfig);
+
+        dispatch({
+            type: ActionTypes.UPDATE_COURSE
+        });
+
+        dispatch(setAlert('Course Updated Successfully', 'Pcreated'));
+        navigate('/login')
+
+    } catch (error) {
+        console.log(error)
+        const errors = error.response.data.errors;
+        if (errors) {
+            errors.map(error => dispatch(setAlert(error.msg, 'notcreated')))
+        }
+
+        dispatch({
+            type: ActionTypes.UPDATE_COURSE_FAIL
+        })
+        dispatch(setAlert('Course Could Not Updated Successfully', 'notcreated'));
+    }
+}
+
+
+export const showSingleCourse = (id) => async dispatch => {
+    console.log(id, 'from action')
+    try {
+        const response = await axios.get(`api/course/coursebyid/${id}`);
+
+        dispatch({
+            type: ActionTypes.SHOW_SINGLE_COURSE,
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch({
+            type: ActionTypes.SHOW_SINGLE_COURSE_ERROR
+        })
+    }
+}

@@ -108,12 +108,10 @@ export const loginUser = ({ email, password }) => async dispatch => {
 }
 
 //logout a user
-export const logoutUser = () => dispatch => {
-    dispatch({
-        type: ActionTypes.CLEAR_PROFILE
-    });
-
+export const logoutUser = (navigate) => dispatch => {
     dispatch({
         type: ActionTypes.LOGOUT
-    });    
+    });
+    
+    navigate('/login')
 }

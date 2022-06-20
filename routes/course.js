@@ -145,4 +145,15 @@ router.put('/updatecourse/:course_id', [auth, [
     }
 })
 
+router.get('/coursebyid/:course_id', async (req, res) => {
+    const courseId = req.params.course_id;
+    try {
+        const course = await Course.find({ _id : courseId})
+        res.send(course);
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({ msg: 'Server Error' })
+    }
+});
+
 module.exports = router;

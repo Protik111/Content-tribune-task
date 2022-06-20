@@ -84,10 +84,10 @@ const Login = () => {
                             <br />
                             <input onChange={handleChange} type="password" name="password" id="password" />
                         </div>
-                        {!newUser && <div className=''>
+                        {/* {!newUser && <div className=''>
                             <label className={styles.labeled} htmlFor="isAdmin">Creator?</label>
                             <input className={styles.checkboxed} onChange={handleChange2} type="checkbox" name="isAdmin" id="isAdmin"  defaultChecked={isAdmin}/>
-                        </div>}
+                        </div>} */}
                         {newUser && <div>
                             <label htmlFor="password2">Confirm Password</label>
                             <br />
