@@ -43,7 +43,6 @@ export const loadAdmin = () => async dispatch => {
 
 //register a user
 export const registerUser = ({ name, email, password }) => async dispatch => {
-    console.log( name, email, password, 'from register Action');
     const headersConfig = {
         headers: {
             'Content-Type': 'application/json'

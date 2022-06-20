@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CourseStyle from '../components/CourseStyle';
-import { showCourses } from '../redux/action/Course.action';
+import { createcourse, showCourses } from '../redux/action/Course.action';
 import { Box } from "@mui/system";
 import LinearProgress from '@mui/material/LinearProgress';
 import { loadAdmin } from '../redux/action/Auth.action';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Alert from '../components/Alert';
+import { useNavigate } from "react-router-dom";
 
 const style = {
     position: 'absolute',
@@ -26,6 +27,25 @@ const Course = () => {
     const { course } = useSelector((state => state.courseReducer));
     const { admin } = useSelector((state => state.authReducer));
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [courseInfo, setcourseInfo] = useState({
+        id: '',
+        step_number: '',
+        title: '',
+        content: '',
+        course_name: '',
+        course_description: '',
+        terminal_type: '',
+        current_users: '',
+        yaml: ''
+    });
+
+    const { id, step_number, title, content, course_name, course_description, terminal_type, current_users, yaml } = courseInfo;
+
+    const handleChange = (e) => {
+        setcourseInfo({ ...courseInfo, [e.target.name]: e.target.value })
+    }
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -36,6 +56,10 @@ const Course = () => {
         dispatch(loadAdmin())
     }, [])
 
+    const handleCourse = async () => {
+        dispatch(createcourse(id, step_number, title, content, course_name, course_description, terminal_type, current_users, yaml, navigate));
+    }
+
     if (course === null) {
         return (
             <Box mt={20} sx={{ width: '100%' }}>
@@ -45,10 +69,12 @@ const Course = () => {
     }
     return (
         <div>
+            <Alert></Alert>
             <div className="d-flex justify-content-center mt-5">
                 {admin ? <h2>Welcome, You are an Admin</h2> : <h2>Welcome, You are a Viewer</h2>}
 
-                <button type="button" class="btn btn-info" onClick={handleOpen}>Create Course</button>
+
+                {admin && <button type="button" class="btn btn-info" onClick={handleOpen}>Create Course</button>}
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -56,12 +82,46 @@ const Course = () => {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Text in a modal
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                        </Typography>
+                        <Alert></Alert>
+                        <TextField id="outlined-basic" label="Id"
+                            name="id"
+                            value={id}
+                            onChange={handleChange}
+                            variant="outlined" type="number" />
+                        <TextField className='mt-1' id="outlined-basic" label="Step Number"
+                            value={step_number}
+                            onChange={handleChange}
+                            name="step_number"
+                            variant="outlined" type="number" />
+                        <TextField className='mt-1' id="Title" label="Title"
+                            name="title" value={title}
+                            onChange={handleChange}
+                            variant="outlined" type="text" />
+                        <TextField className='mt-1' id="outlined-basic" label="Content"
+                            name="content" value={content}
+                            onChange={handleChange}
+                            variant="outlined" type="text" />
+                        <TextField id="outlined-basic" label="Course Name"
+                            name="course_name" value={course_name}
+                            onChange={handleChange}
+                            variant="outlined" type="text" />
+                        <TextField className='mt-1' id="outlined-basic" label="Course Description"
+                            onChange={handleChange}
+                            name="course_description" value={course_description}
+                            variant="outlined" type="text" />
+                        <TextField className='mt-1' id="Title" label="Terminal Type"
+                            name="terminal_type" value={terminal_type}
+                            onChange={handleChange}
+                            variant="outlined" type="text" />
+                        <TextField className='mt-1' id="outlined-basic" label="Current Users"
+                            onChange={handleChange}
+                            name="current_users" value={current_users}
+                            variant="outlined" type="number" />
+                        <TextField className='mt-1' id="outlined-basic" label="Yaml"
+                            name="yaml" value={yaml}
+                            onChange={handleChange}
+                            variant="outlined" type="text" />
+                        {admin && <button type="button" onClick={handleCourse} className="btn btn-info mt-1">Create Course</button>}
                     </Box>
                 </Modal>
 

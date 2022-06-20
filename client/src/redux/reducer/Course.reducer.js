@@ -16,6 +16,11 @@ const courseReducer = (state = initialState, {type, payload}) => {
                 ...state,
                 course: null
             }
+        case ActionTypes.CREATE_COURSE:
+        case ActionTypes.CREATE_COURSE_ERROR:
+            return {
+                ...state
+            }
         default:
             return state;
     }
