@@ -18,6 +18,8 @@ const courseReducer = (state = initialState, {type, payload}) => {
             }
         case ActionTypes.CREATE_COURSE:
         case ActionTypes.CREATE_COURSE_ERROR:
+        case ActionTypes.DELETE_COURSE:
+        case ActionTypes.DELETE_COURSE_ERROR:
             return {
                 ...state
             }

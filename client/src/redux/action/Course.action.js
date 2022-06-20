@@ -48,3 +48,21 @@ export const createcourse = (id, step_number, title, content, course_name, cours
         });
     }
 }
+
+export const deleteCourse = (id, navigate) => async dispatch => {
+    try {
+        const response = await axios.delete(`/api/course/deletecourse/${id}`);
+
+        dispatch({
+            type: ActionTypes.DELETE_COURSE,
+        });
+
+        dispatch(setAlert('Course Deleted Successfully', 'Pcreated'));
+        navigate('/login');
+    } catch (error) {
+        dispatch({
+            type: ActionTypes.DELETE_COURSE_ERROR
+        })
+        dispatch(setAlert('Course Could Not Deleted Successfully', 'notMatchedP'))
+}
+}

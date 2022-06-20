@@ -1,10 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { deleteCourse } from '../redux/action/Course.action';
 import Steps from './Steps';
 
 const CourseStyle = ({ crs }) => {
     const { admin } = useSelector((state => state.authReducer));
-    const { id, steps, course_name, course_description, terminal_type, current_users, yaml } = crs;
+    const { _id, steps, course_name, course_description, terminal_type, current_users, yaml } = crs;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleDelete = () => {
+        dispatch(deleteCourse(_id, navigate))
+    }
     return (
         <div className="card p-5">
             <div className="d-flex">
@@ -12,7 +20,7 @@ const CourseStyle = ({ crs }) => {
                     Course
                 </div>
                 <div>
-                    {admin && <button type="button" class="btn btn-danger">Delete Course</button>}
+                    {admin && <button type="button" onClick={handleDelete} class="btn btn-danger">Delete Course</button>}
                 </div>
             </div>
             <ul className="list-group list-group-flush">
