@@ -3,6 +3,7 @@ const router = express.Router();
 
 router.use('/api/user', require('../routes/user'));
 router.use('/api/user', require('../routes/auth'));
+router.use('/api/course', require('../routes/course'));
 
 //health route
 router.get('/health', (_req, res) => {
