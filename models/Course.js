@@ -5,10 +5,12 @@ const CourseSchema = new mongoose.Schema({
         type : Array ,
         id: {
             type: Number,
+            required: true,
             default: 0,
         },
         step_number: {
             type: Number,
+            required: true,
             default: 0,
         },
         title: {
@@ -22,7 +24,7 @@ const CourseSchema = new mongoose.Schema({
         date: {
             type: Date,
             default: Date.now
-        }
+        },
     },
     course_name: {
         type: String,

@@ -30,7 +30,6 @@ router.get('/userbyid', auth, async (req, res) => {
 router.get('/isAdmin', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
-        console.log(user.email);
         let admin = false;
         if(user.email !== 'admin@gmail.com') {
             admin = false

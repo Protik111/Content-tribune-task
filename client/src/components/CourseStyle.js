@@ -2,10 +2,7 @@ import React from 'react';
 import Steps from './Steps';
 
 const CourseStyle = ({crs}) => {
-    const {steps, course_name, course_description, terminal_type, current_users, yaml} = crs;
-
-    console.log(steps, course_name, course_description, terminal_type, current_users, yaml)
-    console.log(crs)
+    const {id, steps, course_name, course_description, terminal_type, current_users, yaml} = crs;
     return (
         <div className="card p-5">
             <div className="card-header">
