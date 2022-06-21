@@ -34,8 +34,6 @@ const Login = () => {
 
     const { name, email, password, password2, isAdmin } = userInfo;
 
-    console.log(userInfo)
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(userInfo, 'data');

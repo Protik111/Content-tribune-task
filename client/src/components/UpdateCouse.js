@@ -24,8 +24,6 @@ const UpdateCouse = ({ ids }) => {
     const { singleCourse } = useSelector((state => state.courseReducer));
     const dispatch = useDispatch();
 
-    console.log(singleCourse, 'from update')
-
     const [courseInfo, setcourseInfo] = useState({
         id: '',
         step_number: '',
