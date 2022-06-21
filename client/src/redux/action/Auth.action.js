@@ -9,7 +9,7 @@ export const loadUser = () => async dispatch => {
     }
 
     try {
-        const response = await axios.get('/api/user/userbyid');
+        const response = await axios.get('https://damp-savannah-56514.herokuapp.com/api/user/userbyid');
 
         dispatch({
             type: ActionTypes.USER_LOADED,
@@ -28,7 +28,7 @@ export const loadAdmin = () => async dispatch => {
     }
 
     try {
-        const response = await axios.get('/api/user/isAdmin');
+        const response = await axios.get('https://damp-savannah-56514.herokuapp.com/api/user/isAdmin');
 
         dispatch({
             type: ActionTypes.ADMIN_SUCCESS,
@@ -52,7 +52,7 @@ export const registerUser = ({ name, email, password }) => async dispatch => {
     const body = JSON.stringify({ name, email, password });
 
     try {
-        const response = await axios.post('/api/user/register', body, headersConfig);
+        const response = await axios.post('https://damp-savannah-56514.herokuapp.com/api/user/register', body, headersConfig);
 
         dispatch({
             type: ActionTypes.REGISTER_SUCCESS,
@@ -86,7 +86,7 @@ export const loginUser = ({ email, password }) => async dispatch => {
     const body = JSON.stringify({ email, password });
 
     try {
-        const response = await axios.post('/api/user/login', body, headersConfig);
+        const response = await axios.post('https://damp-savannah-56514.herokuapp.com/api/user/login', body, headersConfig);
 
         dispatch({
             type: ActionTypes.LOGIN_SUCCESS,

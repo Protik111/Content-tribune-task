@@ -4,7 +4,7 @@ import { ActionTypes } from "./Course.types";
 
 export const showCourses = () => async dispatch => {
     try {
-        const response = await axios.get('/api/course/showcourse');
+        const response = await axios.get('https://damp-savannah-56514.herokuapp.com/api/course/showcourse');
 
         dispatch({
             type: ActionTypes.SHOW_COURSES,
@@ -27,7 +27,7 @@ export const createcourse = (id, step_number, title, content, course_name, cours
     const body = JSON.stringify({ id, step_number, title, content, course_name, course_description, terminal_type, current_users, yaml });
 
     try {
-        const response = await axios.post('api/course/createcourse', body, headersConfig);
+        const response = await axios.post('https://damp-savannah-56514.herokuapp.com/api/course/createcourse', body, headersConfig);
 
         dispatch({
             type: ActionTypes.CREATE_COURSE,
@@ -51,7 +51,7 @@ export const createcourse = (id, step_number, title, content, course_name, cours
 
 export const deleteCourse = (id, navigate) => async dispatch => {
     try {
-        const response = await axios.delete(`/api/course/deletecourse/${id}`);
+        const response = await axios.delete(`https://damp-savannah-56514.herokuapp.com/api/course/deletecourse/${id}`);
 
         dispatch({
             type: ActionTypes.DELETE_COURSE,
@@ -80,7 +80,7 @@ export const updateCourse = (formData, id, navigate) => async dispatch => {
         };
         const body = JSON.stringify(formData);
 
-        const response = await axios.put(`/api/course/updatecourse/${id}`, body, headersConfig);
+        const response = await axios.put(`https://damp-savannah-56514.herokuapp.com/api/course/updatecourse/${id}`, body, headersConfig);
 
         dispatch({
             type: ActionTypes.UPDATE_COURSE
@@ -107,7 +107,7 @@ export const updateCourse = (formData, id, navigate) => async dispatch => {
 export const showSingleCourse = (id) => async dispatch => {
     console.log(id, 'from action')
     try {
-        const response = await axios.get(`api/course/coursebyid/${id}`);
+        const response = await axios.get(`https://damp-savannah-56514.herokuapp.com/api/course/coursebyid/${id}`);
 
         dispatch({
             type: ActionTypes.SHOW_SINGLE_COURSE,
